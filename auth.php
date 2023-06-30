@@ -42,12 +42,12 @@ require_once "templates/header.php";
                             placeholder="Dígite seu sobrenome...">
                     </div>
                     <div class="form-group">
-                        <label for="password">E-mail: </label>
+                        <label for="password">Senha: </label>
                         <input type="password" class="form-control" id="password" name="password"
                             placeholder="Dígite sua senha...">
                     </div>
                     <div class="form-group">
-                        <label for="confirmpassword">Senha: </label>
+                        <label for="confirmpassword">Confirmar senha: </label>
                         <input type="password" class="form-control" id="confirmpassword" name="confirmpassword"
                             placeholder="Confirme sua senha...">
                     </div>

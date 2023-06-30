@@ -2,6 +2,7 @@
 require_once "config/globals.php";
 require_once "config/db.php";
 require_once "models/Message.php";
+require_once "dao/UserDAO.php";
 
 $message = new Message($BASE_URL);
 
@@ -10,6 +11,10 @@ $flashMessage = $message->getMessage();
 if (!empty($flashMessage["msg"])) {
     $message->clearMessage();
 }
+
+$userDao = new UserDAO($conn, $BASE_URL);
+
+$userData = $userDao->verifyToken(false);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,9 +64,13 @@ if (!empty($flashMessage["msg"])) {
 
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a href="<?= $BASE_URL ?>/auth.php" class="nav-link">Entrar / Cadastrar</a>
-                    </li>
+                    <?php if ($userData): ?>
+                        <p>Tá logado</p>
+                    <?php else: ?>
+                        <li class="nav-item">
+                            <a href="<?= $BASE_URL?>/auth.php" class="nav-link">Entrar / Cadastrar</a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </nav>
@@ -69,6 +78,6 @@ if (!empty($flashMessage["msg"])) {
 
     <?php if (!empty($flashMessage['msg'])): ?>
         <div class="msg-container">
-            <p class="msg error" <?= $flashMessage["type"] ?>><?= $flashMessage["msg"] ?></p>
+            <p class="msg success" <?= $flashMessage["type"] ?>><?= $flashMessage["msg"] ?></p>
         </div>
     <?php endif; ?>

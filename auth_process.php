@@ -29,7 +29,7 @@ if ($type === "register") {
         //verificar se as senhas batem
         if ($password === $confirmpassword) {
             //Verificar se o e-mail já está cadastrado no sistema
-            if($userDao->findByEmail($email) === false){
+            if ($userDao->findByEmail($email) === false) {
                 $user = new User();
 
                 //Criação de token e senha
@@ -39,14 +39,14 @@ if ($type === "register") {
                 $user->name = $name;
                 $user->lastname = $lastname;
                 $user->email = $email;
-                $user->password = $finalpassword;
-                $user->token = $token;
+                $user->password = $finalPassword;
+                $user->token = $userToken;
 
                 $auth = true;
 
                 $userDao->create($user, $auth);
-            }else{
-                $message->setMessage("Usuário já cadastrado, tente outro", "error");
+            } else {
+                $message->setMessage("Usuário já cadastrado, tente outro", "error", "/auth.php");
             }
         } else {
             $message->setMessage("As senhas não são iguais.", "error", "back");
