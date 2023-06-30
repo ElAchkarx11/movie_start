@@ -1,6 +1,7 @@
 <?php
 
-class User {
+class User
+{
 
     public $id;
     public $name;
@@ -11,10 +12,19 @@ class User {
     public $bio;
     public $token;
 
+    public function generateToken()
+    {
+        return bin2hex(random_bytes(50));
+    }
+
+    public function generatePassword($password){
+
+    }
 }
 
-interface UserDAOInteface {
-    
+interface UserDAOInteface
+{
+
     public function buildUser($data);
     public function create(User $user, $authUser = false);
     public function update(User $user);
